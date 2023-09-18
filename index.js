@@ -179,10 +179,6 @@ app.get("/", (req, res) => {
   res.render("index.ejs", { username });
 });
 
-app.all("*", (req, res) => {
-  return handle(req, res);
-});
-
 console.log("Listening on 4000");
 app.listen(4000);
 // Export the Express API
