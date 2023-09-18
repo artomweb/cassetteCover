@@ -35,7 +35,7 @@ var stateKey = "spotify_auth_state";
 var app = express();
 
 if (process.env.NODE_ENV === "development") {
-  app.use(express.static(__dirname + "/public"));
+  app.use(express.static(__dirname + "public"));
   app.set("views", __dirname + "/views");
 }
 
@@ -177,6 +177,10 @@ app.get("/", (req, res) => {
   const username = req.session.display_name;
   console.log(req.session.access_token);
   res.render("index.ejs", { username });
+});
+
+app.all("*", (req, res) => {
+  return handle(req, res);
 });
 
 console.log("Listening on 4000");
