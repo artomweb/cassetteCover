@@ -6,6 +6,7 @@ const session = require("express-session");
 const cors = require("cors");
 const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 const client_id = process.env.client_id; // Your client id
 const client_secret = process.env.client_secret; // Your secret
@@ -35,7 +36,7 @@ var stateKey = "spotify_auth_state";
 var app = express();
 
 if (process.env.NODE_ENV === "development") {
-  app.use(express.static(__dirname + "public"));
+  app.use(express.static(path.join(__dirname, "public")));
   app.set("views", __dirname + "/views");
 }
 
