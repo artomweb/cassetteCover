@@ -33,8 +33,6 @@ const generateRandomString = function (length) {
 
 var stateKey = "spotify_auth_state";
 
-console.log(process.cwd());
-
 var app = express();
 
 if (process.env.NODE_ENV === "development") {
@@ -177,6 +175,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/", (req, res) => {
+  console.log(process.cwd());
   const username = req.session.display_name;
   console.log(req.session.access_token);
   res.render("index.ejs", { username });
