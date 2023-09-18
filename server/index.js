@@ -173,12 +173,12 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-app.get("/", (req, res) => {
-  console.log(process.cwd());
-  const username = req.session.display_name;
-  console.log(req.session.access_token);
-  res.render("index.ejs", { username });
-});
+// app.get("/", (req, res) => {
+//   console.log(process.cwd());
+//   const username = req.session.display_name;
+//   console.log(req.session.access_token);
+//   res.render("index.ejs", { username });
+// });
 
 console.log("Listening on 4000");
 app.listen(4000);
