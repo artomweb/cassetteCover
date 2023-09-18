@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <% if (username) { %>
+    <div id="loggedIn" class="hidden">
+      <h1>Hello <%- username %></h1>
+      <a href="/logout">Logout</a>
+    </div>
+    <% } else{%>
+    <div id="loginButton">
+      <h1>Login:</h1>
+      <a href="/login">Login with Spotify</a>
+    </div>
+    <% } %>
+  </body>
+  <script>
+    console.log("<%- username %>");
+  </script>
+  <script src="/js/index.js"></script>
+</html>
