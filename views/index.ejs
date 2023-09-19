@@ -8,10 +8,112 @@
   </head>
   <body>
     <% if (username) { %>
-    <div id="loggedIn" class="hidden">
-      <h1>Hello <%- username %></h1>
-      <a href="/logout">Logout</a>
+    <div class="page-container">
+      <div>
+        <div id="template" class="hidden jcard-preview">
+          <div
+            class="template printable force-caps"
+            style="color: rgb(0, 0, 0)"
+          >
+            <div
+              class="template-boundaries"
+              style="background-color: rgb(255, 255, 255)"
+            >
+              <div class="template-bleed printable-bleed"></div>
+              <div class="template-crop printable-crop"></div>
+            </div>
+            <div class="template-fold-1 printable-fold"></div>
+            <div class="template-fold-2 printable-fold"></div>
+
+            <div class="template-back">
+              <div
+                id="template-side-a"
+                class="template-side-a"
+                style="font-size: 8pt"
+              >
+                One of Us&nbsp;• Two is the Shoe&nbsp;• Three for Me&nbsp;• Four
+                Out the Door
+              </div>
+              <div
+                id="template-side-b"
+                class="template-side-b"
+                style="font-size: 8pt"
+              >
+                Five is a Hive&nbsp;• Six Movie Flicks&nbsp;• Seven Ate
+                Nine&nbsp;• Eight My Good Mate
+              </div>
+            </div>
+
+            <div class="template-spine">
+              <div class="template-spine-title-group" style="font-size: 12pt">
+                <div id="template-front-title2" class="template-spine-title">
+                  The Numbers Game
+                </div>
+                <div
+                  id="template-front-subtitle2"
+                  class="template-spine-subtitle"
+                >
+                  Dark Mathematicians
+                </div>
+              </div>
+              <!-- <div class="template-note-group" style="font-size: 10pt">
+              <div class="template-note-upper">Recorded</div>
+              <div class="template-note-lower">August 2017</div>
+            </div> -->
+            </div>
+
+            <div class="template-front">
+              <img
+                id="template-cover"
+                class="template-cover"
+                alt="Cover image"
+              />
+              <div class="template-front-group">
+                <div class="template-front-title-group" style="font-size: 12pt">
+                  <div id="template-front-title" class="template-front-title">
+                    The Numbers Game
+                  </div>
+                  <div
+                    id="template-front-subtitle"
+                    class="template-front-subtitle"
+                  >
+                    Dark Mathematicians
+                  </div>
+                </div>
+                <div
+                  id="template-tracks"
+                  class="template-tracks"
+                  style="font-size: 9pt"
+                >
+                  One of Us&nbsp;• Two is the Shoe&nbsp;• Three for Me&nbsp;•
+                  Four Out the Door&nbsp;• Five is a Hive&nbsp;• Six Movie
+                  Flicks&nbsp;• Seven Ate Nine&nbsp;• Eight My Good Mate
+                </div>
+              </div>
+              <!-- <div class="template-type" style="font-size: 10pt">
+                Stereo Tape
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="loggedIn" class="noprint text-fields">
+        <h1>Hello <%- username %></h1>
+        <h2>Enter link to Playlist or Album:</h2>
+        <form action="" id="playlistIDForm">
+          <input
+            type="text"
+            name="playlistID"
+            id="playlistIDInput"
+            placeholder="Link/URI"
+          />
+          <input type="submit" value="Submit" />
+        </form>
+        <a href="/logout">Logout</a>
+      </div>
     </div>
+    <script src="/js/cover.js"></script>
+    <script src="/js/index.js"></script>
     <% } else{%>
     <div id="loginButton">
       <h1>Login:</h1>
@@ -19,8 +121,4 @@
     </div>
     <% } %>
   </body>
-  <script>
-    console.log("<%- username %>");
-  </script>
-  <script src="/js/index.js"></script>
 </html>

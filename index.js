@@ -6,6 +6,7 @@ const session = require("express-session");
 const cors = require("cors");
 const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 const client_id = process.env.client_id; // Your client id
 const client_secret = process.env.client_secret; // Your secret
@@ -43,6 +44,9 @@ app
   .set("view engine", "ejs")
   .use(cors())
   .use(cookieParser())
+  .use(bodyParser.urlencoded({ extended: false }))
+  .use(bodyParser.json())
+
   .use(
     session({
       secret: process.env.SESSION_SECRET,
@@ -177,6 +181,56 @@ app.get("/", (req, res) => {
   const username = req.session.display_name;
   console.log(req.session.access_token);
   res.render("index.ejs", { username });
+});
+
+app.get("/playlistInfo", (req, res) => {
+  // if (!req.session.access_token) res.redirect("/login");
+  console.log(req.query);
+  const rawURL = req.query.linkURL;
+  console.log("rawURL", rawURL);
+  if (rawURL) {
+    const match = rawURL.match(/[A-Za-z0-9]{22}/);
+    if (match !== null) {
+      const playlistURI = match[0];
+      if (rawURL.includes("album")) {
+        fetch(`https://api.spotify.com/v1/albums/${playlistURI}`, {
+          headers: { Authorization: "Bearer " + req.session.access_token },
+        })
+          .then((resp) => resp.json())
+          .then((data) => {
+            if (data.error && data.error.status === 401) {
+              return res.redirect("/logout");
+            }
+            return res.json({ rawURL, data, error: null });
+          })
+          .catch((err) => {
+            console.log(err);
+            return res.json({ error: "Invalid URL" });
+          });
+      } else if (rawURL.includes("playlist")) {
+        fetch(`https://api.spotify.com/v1/playlists/${playlistURI}`, {
+          headers: { Authorization: "Bearer " + req.session.access_token },
+        })
+          .then((resp) => resp.json())
+          .then((data) => {
+            if (data.error && data.error.status === 401) {
+              return res.redirect("/logout");
+            }
+            return res.json({ rawURL, data, error: null });
+          })
+          .catch((err) => {
+            console.log(err);
+            return res.json({ error: "Invalid URL" });
+          });
+      } else {
+        console.log("album or playlist not in url");
+        return res.json({ error: "Invalid URL" });
+      }
+    } else {
+      console.log("Not a url");
+      return res.json({ error: "Not a url" });
+    }
+  }
 });
 
 console.log("Listening on 4000");
