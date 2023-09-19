@@ -1,6 +1,6 @@
 # Cassette Cover generator
 
-A simple Web App that generates Cassette Cover artwork for a given Spotify Playlist or Album.
+A simple Web App that generates Cassette Cover J-cards for a given Spotify Playlist or Album.
 
 ## See example:
 
